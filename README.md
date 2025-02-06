@@ -7,6 +7,24 @@ This project implements a custom Avalanche subnet with the following features:
 - Optimized subnet registration costs
 
 ## Project Structure
+
+avalanche-subnet/
+├── cmd/
+│   └── main/
+│       └── main.go
+├── internal/
+│   └── subnet/
+│       ├── subnet.go
+│       ├── validator.go
+│       ├── fees.go
+│       ├── warp.go
+│       └── registration.go
+├── contracts/
+│   └── TestToken.sol
+├── README.md
+└── go.mod
+
+
 ## Features
 
 ### 1. Dynamic Fee Structure
@@ -87,3 +105,26 @@ go.work
 
 # OS specific files
 .DS_Store
+
+
+Usage Examples
+
+1) Adding a Validator
+goCopyconfig := subnet.SubnetConfig{
+    MinStake:       big.NewInt(1000),
+    MaxValidators:  100,
+    BaseFee:        big.NewInt(1),
+    DynamicFeeMult: 2,
+}
+
+mySubnet := subnet.NewSubnet(config)
+err := mySubnet.AddValidator(validatorAddr, stake)
+
+
+2) Sending Cross-Chain Messages
+goCopywarp := subnet.NewWarpMessenger(mySubnet)
+messageID, err := warp.SendMessage(
+    "destination-chain-123",
+    payload,
+    amount,
+)
