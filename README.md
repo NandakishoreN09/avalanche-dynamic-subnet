@@ -27,6 +27,8 @@ The subnet implementation addresses critical challenges in blockchain network de
 - Advanced protection against network spam and abuse
 
 ## Project Structure
+
+```
 avalanche-subnet/
 ├── cmd/
 │   └── main/
@@ -42,10 +44,12 @@ avalanche-subnet/
 │   └── TestToken.sol
 ├── README.md
 └── go.mod
+```
 
 ## Key Implementation Highlights
 
 ### Validator Integration Example
+```go
 config := subnet.SubnetConfig{
    MinStake:       big.NewInt(1000),
    MaxValidators:  100,
@@ -54,14 +58,17 @@ config := subnet.SubnetConfig{
 }
 mySubnet := subnet.NewSubnet(config)
 err := mySubnet.AddValidator(validatorAddr, stake)
+```
 
 ### Cross-Subnet Messaging
+```go
 warp := subnet.NewWarpMessenger(mySubnet)
 messageID, err := warp.SendMessage(
    "destination-chain-123",
    payload,
    amount,
 )
+```
 
 ## Technologies Utilized
 - Golang
